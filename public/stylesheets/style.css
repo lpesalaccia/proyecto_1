@@ -1,0 +1,53 @@
+header {
+  background-color: #A19B9B;
+  margin: 0;
+  height: 100px;
+}
+.holder {
+  height: 100%;
+  width: 100%;
+}
+
+footer {
+  background-color: rgb(75, 58, 41);
+  color: white;
+  padding: 5px 0;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+footer {
+  margin: auto 0;
+}
+
+/*de index.css*/
+main div {
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 200;
+}
+
+.holder {
+  height: 100%;
+  width: 100%;
+}
+
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 200;
+}
