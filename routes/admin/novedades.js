@@ -16,11 +16,11 @@ router.get('/', async function(req, res, next) {
   });
 });
 
-router.get('agregar', (req, res, next) => {
-  res.render('admin/agregar', { // agregar.hbs
-    layout: 'admin/layout'
-  }) //cierra render
-}); //cierra get
+router.get('/agregar', (req, res, next) => {
+  res.render('admin/agregar', {
+    layout: 'admin/layout',
+  })
+});
 
 router.post('/agregar', async (req, res, next) => {
   try {
@@ -43,5 +43,52 @@ router.post('/agregar', async (req, res, next) => {
     })
   }
 })
+
+/*Para eliminar una novedad */
+router.get('/eliminar/:id', async (req, res, next) => {
+  var id = req.params.id;
+  await novedadesModel.deleteNovedadById(id);
+  res.redirect('/admin/novedades');
+
+}); //cierra get de eliminar
+
+
+/* para listar UNA SOLA novedad by id - modificar - diseño */
+router.get('/modificar/:id', async (req, res, next) => {
+  var id = req.params.id;
+  //console.log(req.params.id);
+  var novedad = await novedadesModel.getNovedadById(id);
+
+  res.render('admin/modificar',{ //modificar.hbs
+    layout:'admin/layout',
+    novedad
+  })
+
+});
+
+//para modificar la novedad
+router.post('/modificar', async (req, res, next) => {
+  try {
+    
+    var obj = {
+      titulo: req.body.titulo,
+      subtitulo: req.body.subtitulo,
+      cuerpo: req.body.cuerpo
+    }
+    console.log(obj)
+
+    await novedadesModel.modificarNovedadById(obj, req.body.id);
+    res.redirect('/admin/novedades');
+
+  } catch (error) {
+    console.log(error)
+    res.render('admin/modificar', {
+      layout:'admin/layout',
+      error: true,
+      message: 'No se modificó la novedad'
+    })
+  }
+})
+
 
 module.exports = router;
